@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>voltshine-Home</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@500,700,800&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root,
+    [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --radius-sm: 0.5rem;
+      --radius-md: 0.875rem;
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --radius-full: 999px;
+      --color-bg: #f6f6f3;
+      --color-surface: #ffffff;
+      --color-surface-2: #f1f4f2;
+      --color-surface-offset: #e9eeea;
+      --color-border: rgba(40, 37, 29, 0.1);
+      --color-text: #161915;
+      --color-text-muted: #5c665e;
+      --color-text-faint: #879087;
+      --color-primary: #0c6d66;
+      --color-primary-hover: #09554f;
+      --color-primary-soft: rgba(12, 109, 102, 0.1);
+      --color-accent: #d98b1f;
+      --color-accent-soft: rgba(217, 139, 31, 0.12);
+      --shadow-sm: 0 10px 30px rgba(17, 24, 39, 0.06);
+      --shadow-md: 0 18px 50px rgba(17, 24, 39, 0.12);
+      --font-body: 'Satoshi', sans-serif;
+      --font-display: 'Cabinet Grotesk', sans-serif;
+      --content: 1180px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #111311;
+      --color-surface: #171a17;
+      --color-surface-2: #1d211d;
+      --color-surface-offset: #232823;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-text: #eef2ec;
+      --color-text-muted: #b2bbb1;
+      --color-text-faint: #7f8880;
+      --color-primary: #5ab5ad;
+      --color-primary-hover: #7bc8c1;
+      --color-primary-soft: rgba(90, 181, 173, 0.14);
+      --color-accent: #f0af4b;
+      --color-accent-soft: rgba(240, 175, 75, 0.14);
+      --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 22px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top left, var(--color-primary-soft), transparent 28%),
+        radial-gradient(circle at top right, var(--color-accent-soft), transparent 24%),
+        var(--color-bg);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3rem;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-full);
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: color-mix(in srgb, var(--color-bg) 76%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font: 800 var(--text-lg)/1 var(--font-display);
+      letter-spacing: -0.03em;
+    }
+
+    .brand-subtitle {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-full);
+      color: var(--color-text-muted);
+      transition: 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--color-text);
+      background: var(--color-surface);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .theme-toggle {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      display: grid;
+      place-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 48px;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      transition: 180ms ease;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    main {
+      overflow: clip;
+    }
+
+    section {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      min-height: calc(100vh - 88px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+    }
+
+    .hero p {
+      margin-top: 1.25rem;
+      max-width: 58ch;
+      color: var(--color-text-muted);
+      font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      padding: 1.1rem 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat strong {
+      display: block;
+      font: 800 var(--text-xl)/1 var(--font-display);
+    }
+
+    .stat span {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      border-radius: 30px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-visual {
+      aspect-ratio: 4 / 4.6;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.2)),
+        url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1000&q=80') center/cover;
+      position: relative;
+    }
+
+    .floating-card {
+      position: absolute;
+      right: -1rem;
+      bottom: 1.25rem;
+      width: min(260px, 82%);
+      padding: 1rem;
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(14px);
+    }
+
+    .floating-card p {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-head h2 {
+      font: 800 var(--text-2xl)/1 var(--font-display);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      max-width: 54ch;
+      color: var(--color-text-muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .service-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-media {
+      aspect-ratio: 16 / 11;
+    }
+
+    .service-content {
+      padding: 1.35rem;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      padding: 0.4rem 0.7rem;
+      margin-bottom: 0.8rem;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      font-weight: 700;
+    }
+
+    .service-card h3 {
+      font: 700 var(--text-lg)/1.15 var(--font-display);
+      margin-bottom: 0.65rem;
+    }
+
+    .service-card p {
+      color: var(--color-text-muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 1.25rem;
+    }
+
+    .panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 28px;
+      padding: clamp(1.25rem, 2vw, 2rem);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--color-text-muted);
+    }
+
+    .feature-bullet {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .metric {
+      padding: 1rem;
+      border-radius: 22px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+    }
+
+    .metric strong {
+      display: block;
+      font: 800 var(--text-xl)/1 var(--font-display);
+    }
+
+    .metric span {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 1.25rem;
+    }
+
+    .contact-card {
+      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      border-radius: 28px;
+      padding: clamp(1.5rem, 2vw, 2rem);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-points {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-points li {
+      color: var(--color-text-muted);
+    }
+
+    .contact-points strong {
+      color: var(--color-text);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 0.5rem;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      border-radius: 16px;
+      padding: 0.95rem 1rem;
+      outline: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px var(--color-primary-soft);
+    }
+
+    footer {
+      padding: 1.5rem 0 3rem;
+      color: var(--color-text-muted);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+
+      .hero-grid,
+      .about-grid,
+      .contact-shell,
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        padding-top: 2rem;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-card {
+        position: static;
+        width: 100%;
+        margin-top: 1rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-wrap {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand {
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .nav-actions {
+        justify-content: center;
+      }
+
+      .hero h1 {
+        max-width: 9ch;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-wrap {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <a class="skip-link" href="#main-content">Skip to content</a> -->
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L5 13h5l-1 9 10-13h-6l0-7Z" fill="currentColor" />
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">voltshine</div>
+          <div class="brand-subtitle">Electrical & Solar Services</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Trusted electrical, solar and repair support in Maharashtra</span>
+          <h1>Reliable service for homes, shops and solar-ready spaces.</h1>
+          <p>voltshine is a trusted electrical startup offering solar solutions, appliance repair, and maintenance for homes and businesses. We provide reliable service, quick support, and expert care to keep your spaces powered and efficient.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#services">Explore Services</a>
+            <a class="btn btn-secondary" href="#about">Why Choose Us</a>
+          </div>
+          <div class="hero-stats" aria-label="Company highlights">
+            <div class="stat"><strong>4+</strong><span>Years of field experience</span></div>
+            <div class="stat"><strong>24/7</strong><span>Quick support for urgent issues</span></div>
+            <div class="stat"><strong>120+</strong><span>Residential and business jobs handled</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-visual" role="img" aria-label="Solar panels and energy infrastructure"></div>
+          <div class="floating-card">
+            <strong style="display:block;margin-bottom:.35rem;font-size:var(--text-sm);">⚡ Currently available</strong>
+            <p>Electrical, solar & appliance repair across Ratnagiri, Maharashtra. Quick response, fair pricing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">What we do</span>
+            <h2>Expert services for every electrical and solar need.</h2>
+          </div>
+          <!-- <p>The old structure has been transformed into a more polished service grid with visual hierarchy, image-led
+            cards, and softer surfaces that feel current and professional.</p> -->
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-media">
+              <img src="./img/image_65a47b8c.png"alt="Electrician working on wiring" loading="lazy" width="900" height="620" />
+            </div>
+            <div class="service-content">
+              <span class="service-tag">Electrical work</span>
+              <h3>Wiring, upgrades and maintenance</h3>
+              <p>Ideal for residential and commercial spaces that need safe installation, rewiring, switchboard work,
+                and dependable ongoing support.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=80"
+                alt="Solar panel installation on rooftop" loading="lazy" width="900" height="620" />
+            </div>
+            <div class="service-content">
+              <span class="service-tag">Solar systems</span>
+              <h3>Solar setup with smart planning</h3>
+              <p>Built for homes and businesses seeking efficient solar panel installation, subsidy guidance, and
+                long-term performance support.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <img src="./img/appliance_repair.png"
+                alt="Technician repairing home appliance" loading="lazy" width="900" height="620" />
+            </div>
+            <div class="service-content">
+              <span class="service-tag">Repair support</span>
+              <h3>Fast appliance troubleshooting</h3>
+              <p>For fans, AC units, refrigerators, and other essential appliances that need quick diagnosis and
+                practical repair solutions.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="panel">
+          <span class="eyebrow">About voltshine</span>
+          <h2 style="font:800 var(--text-2xl)/1 var(--font-display);letter-spacing:-0.04em;">Local expertise you can count on, every time.</h2>
+          <p style="margin-top:1rem;color:var(--color-text-muted);">voltshine was founded to bring dependable, affordable electrical and solar services to homes and businesses across Ratnagiri. Our team combines hands-on field experience with a commitment to safe, clean, and lasting work — no shortcuts, no surprises.</p>
+          <ul class="feature-list">
+            <li><span class="feature-bullet">01</span><span>Licensed and insured technicians handling every job with professional care and attention to safety.</span></li>
+            <li><span class="feature-bullet">02</span><span>Transparent pricing with no hidden charges — you'll always know what you're paying before work begins.</span></li>
+            <li><span class="feature-bullet">03</span><span>End-to-end support from consultation and installation to ongoing maintenance and emergency repairs.</span></li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <span class="eyebrow">Business highlights</span>
+          <p style="color:var(--color-text-muted);">Here's what sets voltshine apart from the rest — built on trust, skill, and a genuine commitment to our community.</p>
+          <div class="metrics">
+            <div class="metric"><strong>Licensed</strong><span>Professional electrical and solar support</span></div>
+            <div class="metric"><strong>Insured</strong><span>Better confidence for residential jobs</span></div>
+            <div class="metric"><strong>Ratnagiri</strong><span>Serving local customers across the region</span></div>
+            <div class="metric"><strong>Affordable</strong><span>Clearer service positioning for practical
+                budgets</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-shell">
+        <div class="contact-card">
+          <span class="eyebrow">Get in touch</span>
+          <h2 style="font:800 var(--text-2xl)/1 var(--font-display);letter-spacing:-0.04em;">Let's get your project started.</h2>
+          <ul class="contact-points">
+            <li><strong>Phone</strong>+91-**********</li>
+            <li><strong>Email</strong>info@voltshine.in</li>
+            <li><strong>Location</strong>Ratnagiri, Maharashtra</li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <span class="eyebrow">Quick enquiry</span>
+          <form class="contact-form">
+            <label>Full name
+              <input type="text" placeholder="Enter your name" />
+            </label>
+            <label>Phone number
+              <input type="tel" placeholder="Enter your phone number" />
+            </label>
+            <label>Project details
+              <textarea rows="5" placeholder="Tell us about electrical, solar, or repair work"></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Send Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© 2026 voltshine Electrical & Solar Services.</p>
+      <!-- <p>Redesigned with a cleaner visual system, modern typography and responsive UI styling.</p> -->
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', mode);
+
+      const updateIcon = () => {
+        toggle.innerHTML = mode === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>';
+      };
+
+      updateIcon();
+      toggle.addEventListener('click', function () {
+        mode = mode === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', mode);
+        updateIcon();
+      });
+    }());
+  </script>
+</body>
+
+</html>
